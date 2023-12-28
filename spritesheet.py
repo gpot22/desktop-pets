@@ -1,5 +1,4 @@
 import pygame
-from enum import Enum
 
 class SpriteSheet():
     def __init__(self, image, frame_size, transparent_color):

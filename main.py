@@ -18,7 +18,6 @@ SCR_W, SCR_H = pygame.display.get_surface().get_size()
 FPS = 60
 FLOOR = SCR_H - get_taskbar_height()
 
-BLUE = (45, 147, 173)
 BLACK = (0, 0, 0)
 
 # create layered transparent window
@@ -183,16 +182,16 @@ class Bird(pygame.sprite.Sprite):
             self.current_sprite = 0
         self.image = self.get_frame()
 
-actors = pygame.sprite.Group()
-dino = Dino(dino_spritesheet, 80, 0)
-actors.add(dino)
-
-birb = Bird(birb_spritesheet, 100, 50)
-actors.add(birb)
-
 def main():
     clock = pygame.time.Clock()
     run = True
+    
+    actors = pygame.sprite.Group()
+    dino = Dino(dino_spritesheet, 80, 0)
+    actors.add(dino)
+
+    birb = Bird(birb_spritesheet, 100, 50)
+    actors.add(birb)
     
     while run:
         clock.tick(FPS)
