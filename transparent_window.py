@@ -2,10 +2,10 @@ import pygame
 import win32api
 import win32con
 import win32gui
-# Code borrowed from: https://stackoverflow.com/questions/550001/fully-transparent-windows-in-pygame
 
 TRANSPARENT = (55, 155, 255)  # Transparency color
 
+'''Code borrowed from: https://stackoverflow.com/questions/550001/fully-transparent-windows-in-pygame'''
 def set_window_transparent():
     # create layered window
     hwnd = pygame.display.get_wm_info()["window"]
@@ -18,7 +18,6 @@ def set_window_transparent():
     win32gui.SetWindowPos(hwnd, win32con.HWND_TOPMOST, 0, 0, 0, 0, win32con.SWP_NOSIZE)
     
 def get_taskbar_height():
-
     monitor_info = win32api.GetMonitorInfo(win32api.MonitorFromPoint((0,0)))
     monitor_area = monitor_info.get("Monitor")
     work_area = monitor_info.get("Work")

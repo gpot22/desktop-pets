@@ -95,7 +95,6 @@ class Dino(pygame.sprite.Sprite):
             self.current_sprite = 0
         self.image = self.get_frame()
         
-        
 
 class Bird(pygame.sprite.Sprite):
     FRIC = -0.08
@@ -124,10 +123,10 @@ class Bird(pygame.sprite.Sprite):
         
         self.rect = self.image.get_rect()
         self.rect.center = self.pos
-        self.floor = FLOOR - self.rect.height/2 + 48
+        self.floor = FLOOR - self.rect.height/2 + 72
     
     def get_frame(self):
-        return self.spritesheet.get_image(int(self.current_sprite), 2, state=self.sprite_states[self.state].idx, right=self.isRight)
+        return self.spritesheet.get_image(int(self.current_sprite), 3, state=self.sprite_states[self.state].idx, right=self.isRight)
     
     def update(self, speed):
         self.acc = vec(0,0)
@@ -145,7 +144,7 @@ class Bird(pygame.sprite.Sprite):
             else:
                 self.state = 'idle' if self.pos.y == self.floor else 'glide'
             
-            if pressed_keys[pygame.K_SPACE] and self.flapping_count == 0 and self.flap_released:  # up
+            if (pressed_keys[pygame.K_SPACE] or pressed_keys[pygame.K_w] or pressed_keys[pygame.K_UP]) and self.flapping_count == 0 and self.flap_released:  # up
                 self.flapping_count = 22
                 self.flap_released = False
                 
@@ -200,7 +199,7 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
             if event.type == pygame.KEYUP:
-                if event.key == pygame.K_SPACE:
+                if event.key == pygame.K_SPACE or event.key == pygame.K_w or event.key == pygame.K_UP:
                     birb.flap_released = True
         
         # update background
@@ -208,6 +207,7 @@ def main():
         # draw stuff
         actors.draw(scr)
         actors.update(0.2)
+        # pygame.draw.rect(scr, 'red', birb.rect, width=2)
         pygame.display.update()
         
 main()
